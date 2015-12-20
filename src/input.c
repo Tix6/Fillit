@@ -22,7 +22,7 @@
 **
 */
 
-char const	*shapes[19] = {
+char const	*shapes[20] = {
 	"##..##",           // | |
 	"#...#...#...#...", //  |
 	"####",         //  -–
@@ -41,7 +41,8 @@ char const	*shapes[19] = {
 	".##.##",       // S
 	"#...##...#",
 	"##...##",      // Z
-	".#..##..#"
+	".#..##..#",
+	NULL
 };
 
 static int	check_neightbors(char **array, int i, int j)

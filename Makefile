@@ -1,6 +1,6 @@
 NAME = fillit
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror -Iincludes
+CFLAGS = -Wall -Wextra -Werror -Iincludes
 CFLAGS = -I ./inc
 LDFLAGS = #-L libft/ -lft
 SRCS = src/main.c \
@@ -8,7 +8,9 @@ src/input.c \
 src/list.c \
 src/tetriminos.c \
 src/misc.c \
-src/ft_strsplit.c
+src/ft_strsplit.c \
+src/square.c \
+src/fill.c
 
 
 OBJS = $(SRCS:.c=.o)

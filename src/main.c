@@ -12,18 +12,23 @@
 
 #include "fillit.h"
 
+void print_tet(t_lst *tet)
+{
+	while (tet)
+	{
+		printf("[%d] %s\n", tet->id, shapes[tet->shape]);
+		tet = tet->next;
+	}
+}
+
 int	main(int ac, const char *av[])
 {
 	t_lst   *tetriminos;
-	char    **square;
 
 	tetriminos = NULL;
 	if (ac != 2 || !parse_input_file(av[1], &tetriminos))
-		write(1, "Error\n", 6);
-	// while (tetriminos)
-	// {
-	// 	printf("%s\n", shapes[tetriminos->shape]);
-	// 	tetriminos = tetriminos->next;
-	// }
-	return (0);
+		return (write(1, "Error\n", 6));
+	printf("%d tetriminos\n", list_len(tetriminos));
+	print_tet(tetriminos);
+	return (fillit(tetriminos));
 }

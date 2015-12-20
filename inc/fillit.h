@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:07:14 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/12 19:44:50 by mleconte         ###   ########.fr       */
+/*   Updated: 2015/12/20 21:12:29 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_lst
 	struct s_lst    *next;
 }               t_lst;
 
-extern const char *shapes[19];
+extern const char *shapes[20];
 
 void	push_to_list(t_lst **data, t_lst *node);
 t_lst	*new_node(int t, char c);
@@ -36,5 +36,15 @@ int		recognize_tetriminos(char **array);
 
 char	**ft_strsplit(char const *s, char c);
 int		count_char(char const *str, int c);
+void	err_exit(char const *msg);
+void	*smalloc(size_t len);
+int		list_len(t_lst *list);
+
+char	**init_square(int blocks);
+void	print_square(char **square);
+
+int 	fillit(t_lst *tetriminos);
+
+# define ERR_MALLOC "ERR_MALLOC"
 
 #endif

@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tetriminos.c                                       :+:      :+:    :+:   */
+/*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/12 19:24:29 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/12 19:47:50 by mleconte         ###   ########.fr       */
+/*   Created: 2016/05/02 15:11:01 by mleconte          #+#    #+#             */
+/*   Updated: 2016/05/02 15:11:32 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static char	*stringify_tetriminos(char **arr)
+int	fillit(t_lst *tetriminos)
 {
-	char *str;
+	char    **square;
 
-	str = (char *)smalloc(sizeof(17));
-	bzero(str, 17);
-	while (arr && *arr)
+	if (tetriminos)
 	{
-		str = strcat(str, *arr);
-		arr++;
+		square = init_square(list_len(tetriminos) * 4);
+		print_square(square);
 	}
-	return (strdup(str));
-}
-
-int			recognize_tetriminos(char **array)
-{
-	char *tetriminos;
-	int index = 0;
-
-	tetriminos = stringify_tetriminos(array);
-	while (shapes[index])
+	else
 	{
-		if (strstr(tetriminos, shapes[index]))
-			return (index);
-		index++;
+		write(2, "no_tetriminos", 13);
+		return (-1);
 	}
-	return (-1);
+	return (0);
 }
