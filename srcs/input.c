@@ -6,44 +6,11 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:12:21 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/05 15:34:52 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/06 19:42:47 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-/*
-**  Tetriminos Array Representation :
-**
-**  [ 0  | 1  | 2  | 3  ] \n
-**  [ 5  | 6  | 7  | 8  ] \n
-**  [ 10 | 11 | 12 | 13 ] \n
-**  [ 15 | 16 | 17 | 18 ]
-**
-*/
-
-char const	*shapes[20] = {
-	"##..##",           // | |
-	"#...#...#...#...", //  |
-	"####",         //  -–
-	".#..###",      //  T
-	"#...##..#",
-	"###..#",
-	".#..##...#",
-	".#...#..##",   // J
-	"#...###",
-	"##..#...#",
-	"###....#",
-	"#...#...##",   // L
-	"###.#",
-	"##...#...#",
-	"..#.###",
-	".##.##",       // S
-	"#...##...#",
-	"##...##",      // Z
-	".#..##..#",
-	NULL
-};
 
 static int	check_neightbors(char **array, int i, int j)
 {
@@ -92,8 +59,8 @@ static int	is_valid_chunk(char **array)
 
 static int	parse_input_chunk(char const *chunk, t_lst **data)
 {
-	static int count;
-	char **array;
+	static int	count = -1;
+	char 		**array;
 
 	if (count < 26 && chunk && ft_strlen(chunk) == 20)
 	{
@@ -109,7 +76,7 @@ static int	parse_input_chunk(char const *chunk, t_lst **data)
 		// think about freeing array
 		if (is_valid_chunk(array))
 		{
-			push_to_list(data, new_node(recognize_tetriminos(array), count));
+			push_to_list(data, new_node(recognize_tetriminos(array), count + 'A'));
 			return (1);
 		}
 		else
@@ -131,6 +98,8 @@ int parse_input_file(char const *file, t_lst **data)
 		{
 			ft_memset((void *)buf, 0x00, 21);
 			ret = read(fd, buf, 20);
+			ft_putstr_fd(buf, 2);
+			ft_putchar('\n');
 			if (ret != 20 || !parse_input_chunk(buf, data))
 				return (0);
 			ret = read(fd, skip, 1);
@@ -139,6 +108,7 @@ int parse_input_file(char const *file, t_lst **data)
 			if (ret <= 0)
 				break ;
 		}
+		close(fd);
 	}
 	return (1);
 }

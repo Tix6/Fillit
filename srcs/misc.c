@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:13:46 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/05 15:40:10 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 17:06:45 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		count_char(char const *str, int c)
 
 void 	err_exit(char const *msg)
 {
-	exit(write(2, msg, ft_strlen(msg)));
+	ft_putendl_fd(msg, 2);
+	exit(-1);
 }
 
 int		list_len(t_lst *list)
