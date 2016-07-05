@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/12 19:06:37 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/12 20:06:21 by mleconte         ###   ########.fr       */
+/*   Created: 2016/05/02 15:11:01 by mleconte          #+#    #+#             */
+/*   Updated: 2016/07/05 15:30:17 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void print_tet(t_lst *tet)
+int	fillit(t_lst *tetriminos)
 {
-	while (tet)
+	char    **square;
+
+	if (tetriminos)
 	{
-		printf("[%d] %s\n", tet->id, shapes[tet->shape]);
-		tet = tet->next;
+		square = init_square(list_len(tetriminos) * 4);
+		print_square(square);
 	}
-}
-
-int	main(int ac, const char *av[])
-{
-	t_lst   *tetriminos;
-
-	tetriminos = NULL;
-	if (ac != 2 || !parse_input_file(av[1], &tetriminos))
-		return (write(1, "Error\n", 6));
-	printf("%d tetriminos\n", list_len(tetriminos));
-	print_tet(tetriminos);
-	return (fillit(tetriminos));
+	else
+	{
+		ft_putstr_fd("no tetriminos", 2);
+		return (-1);
+	}
+	return (0);
 }

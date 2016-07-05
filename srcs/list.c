@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:11:23 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/20 20:56:40 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 15:39:57 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_lst	*new_node(int t, char c)
 {
 	t_lst *node;
 
-	node = smalloc(sizeof(*node));
+	node = ft_smalloc(sizeof(*node));
 	node->shape = t;
 	node->id = c;
 	node->next = NULL;

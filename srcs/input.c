@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:12:21 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/12 20:08:56 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 15:34:52 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	parse_input_chunk(char const *chunk, t_lst **data)
 	static int count;
 	char **array;
 
-	if (count < 26 && chunk && strlen(chunk) == 20)
+	if (count < 26 && chunk && ft_strlen(chunk) == 20)
 	{
 		count++;
 		if (count_char(chunk, '#') != 4 ||
@@ -129,7 +129,7 @@ int parse_input_file(char const *file, t_lst **data)
 	{
 		while (1)
 		{
-			bzero(buf, 21);
+			ft_memset((void *)buf, 0x00, 21);
 			ret = read(fd, buf, 20);
 			if (ret != 20 || !parse_input_chunk(buf, data))
 				return (0);

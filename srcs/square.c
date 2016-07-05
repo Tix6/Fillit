@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   square.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 18:01:09 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/20 21:16:20 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 15:39:48 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_square(char **square)
 {
 	while (square && *square)
 	{
-		printf("%s\n", *square);
+		ft_putendl(*square);
 		square++;
 	}
 }
@@ -42,13 +42,13 @@ char		**init_square(int blocks)
 	i = 0;
 	sqrt = square_root(blocks);
 	len = sqrt * sqrt + sqrt;
-	square = smalloc(sizeof(*square) * sqrt + 1);
-	row = smalloc(len);
-	bzero(row, len);
+	square = ft_smalloc(sizeof(*square) * sqrt + 1);
+	row = ft_smalloc(len);
+	ft_memset((void *)row, 0x00, len);
 	while (i < sqrt)
 	{
 		square[i] = &row[i * sqrt + i];
-		square[i] = memset((void *)square[i], '.', sqrt);
+		square[i] = ft_memset((void *)square[i], '.', sqrt);
 		i++;
 	}
 	square[i] = NULL;

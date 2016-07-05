@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:24:29 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/12 19:47:50 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 15:39:35 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ static char	*stringify_tetriminos(char **arr)
 {
 	char *str;
 
-	str = (char *)smalloc(sizeof(17));
-	bzero(str, 17);
+	str = (char *)ft_smalloc(sizeof(17));
+	ft_memset((void *)str, 0x00, 17);
 	while (arr && *arr)
 	{
-		str = strcat(str, *arr);
+		str = ft_strcat(str, *arr);
 		arr++;
 	}
-	return (strdup(str));
+	return (ft_strdup(str));
 }
 
 int			recognize_tetriminos(char **array)
@@ -34,7 +34,7 @@ int			recognize_tetriminos(char **array)
 	tetriminos = stringify_tetriminos(array);
 	while (shapes[index])
 	{
-		if (strstr(tetriminos, shapes[index]))
+		if (ft_strstr(tetriminos, shapes[index]))
 			return (index);
 		index++;
 	}

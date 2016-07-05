@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:07:14 by mleconte          #+#    #+#             */
-/*   Updated: 2015/12/20 21:12:29 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/05 15:39:01 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <strings.h>
+# include "libft.h"
 
 typedef struct s_lst
 {
@@ -34,17 +33,13 @@ t_lst	*new_node(int t, char c);
 int		parse_input_file(char const *file, t_lst **data);
 int		recognize_tetriminos(char **array);
 
-char	**ft_strsplit(char const *s, char c);
 int		count_char(char const *str, int c);
 void	err_exit(char const *msg);
-void	*smalloc(size_t len);
 int		list_len(t_lst *list);
 
 char	**init_square(int blocks);
 void	print_square(char **square);
 
 int 	fillit(t_lst *tetriminos);
-
-# define ERR_MALLOC "ERR_MALLOC"
 
 #endif

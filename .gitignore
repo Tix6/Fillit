@@ -1,3 +1,4 @@
 fillit
-src/*.o
+.objs
 .DS_Store
+*nfs*
