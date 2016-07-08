@@ -6,13 +6,58 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:24:29 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/06 20:27:01 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 21:05:50 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static char	*stringify_tetriminos(char **arr)
+static t_pos		g_coords[19][3] = {
+	{{.y = 1, .x = 0}, {.y = 0, .x = 1}, {.y = 1, .x = 1}},
+	{{.y = 0, .x = 1}, {.y = 0, .x = 2}, {.y = 0, .x = 3}},
+	{{.y = 1, .x = 0}, {.y = 2, .x = 0}, {.y = 3, .x = 0}},
+	{{.y = -1, .x = 1}, {.y = 0, .x = 1}, {.y = 1, .x = 1}},
+	{{.y = 1, .x = 0}, {.y = 2, .x = 0}, {.y = 1, .x = 1}},
+	{{.y = 0, .x = 1}, {.y = 1, .x = 1}, {.y = 0, .x = 2}},
+	{{.y = -1, .x = 1}, {.y = 0, .x = 1}, {.y = 0, .x = 2}},
+	{{.y = 0, .x = 1}, {.y = -1, .x = 2}, {.y = 0, .x = 2}},
+	{{.y = 0, .x = 1}, {.y = 1, .x = 1}, {.y = 2, .x = 1}},
+	{{.y = 1, .x = 0}, {.y = 0, .x = 1}, {.y = 0, .x = 2}},
+	{{.y = 1, .x = 0}, {.y = 2, .x = 0}, {.y = 2, .x = 1}},
+	{{.y = 0, .x = 1}, {.y = 0, .x = 2}, {.y = 1, .x = 2}},
+	{{.y = 1, .x = 0}, {.y = 2, .x = 0}, {.y = 0, .x = 1}},
+	{{.y = 1, .x = 0}, {.y = 1, .x = 1}, {.y = 1, .x = 2}},
+	{{.y = -2, .x = 1}, {.y = -1, .x = 1}, {.y = 0, .x = 1}},
+	{{.y = 1, .x = 0}, {.y = -1, .x = 1}, {.y = 0, .x = 1}},
+	{{.y = 0, .x = 1}, {.y = 1, .x = 1}, {.y = 1, .x = 2}},
+	{{.y = 1, .x = 0}, {.y = 1, .x = 1}, {.y = 2, .x = 1}},
+	{{.y = -1, .x = 1}, {.y = 0, .x = 1}, {.y = -1, .x = 2}}
+};
+
+static char const	*g_shapes[20] = {
+	"##..##",
+	"#...#...#...#",
+	"####",
+	"#..###",
+	"###..#",
+	"#...##..#",
+	"#..##...#",
+	"#...#..##",
+	"#...###",
+	"##..#...#",
+	"###...#",
+	"#...#...##",
+	"###.#",
+	"##...#...#",
+	"#.###",
+	"##.##",
+	"#...##...#",
+	"##...##",
+	"#..##..#",
+	NULL
+};
+
+static char			*stringify_tetriminos(char **arr)
 {
 	char *str;
 
@@ -26,18 +71,26 @@ static char	*stringify_tetriminos(char **arr)
 	return (ft_strdup(str));
 }
 
-int			recognize_tetriminos(char **array)
+t_tet				recognize_tetriminos(char **array)
 {
-	char *tetriminos;
-	int index = 0;
+	static char	id = 'A';
+	t_tet		new_tetriminos;
+	char		*stringified;
+	int			index;
 
-	tetriminos = stringify_tetriminos(array);
-	while (shapes[index])
+	index = 0;
+	stringified = stringify_tetriminos(array);
+	new_tetriminos = (t_tet){0, (t_pos){0, 0}, NULL};
+	while (g_shapes[index])
 	{
-		if (ft_strstr(tetriminos, shapes[index]))
-			return (index);
+		if (ft_strstr(stringified, g_shapes[index]))
+		{
+			new_tetriminos.char_id = id++;
+			new_tetriminos.vector = g_coords[index];
+			break ;
+		}
 		index++;
 	}
-	err_exit("error");
-	return (-1);
+	ft_strdel(&stringified);
+	return (new_tetriminos);
 }

@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:13:46 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/05 17:06:45 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 20:46:46 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int		count_char(char const *str, int c)
 		return (0);
 }
 
-void 	err_exit(char const *msg)
+void	err_exit(char const *msg)
 {
-	ft_putendl_fd(msg, 2);
+	ft_putendl(msg);
 	exit(-1);
 }
 

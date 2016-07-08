@@ -6,13 +6,13 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:12:21 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/06 19:42:47 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 21:16:30 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int	check_neightbors(char **array, int i, int j)
+static int	check_neighbors(char **array, int i, int j)
 {
 	int nb;
 
@@ -33,11 +33,11 @@ static int	check_neightbors(char **array, int i, int j)
 
 static int	is_valid_chunk(char **array)
 {
-	int neightbors;
+	int neighbors;
 	int i;
 	int j;
 
-	neightbors = 0;
+	neighbors = 0;
 	i = 0;
 	j = 0;
 	if (array)
@@ -47,20 +47,20 @@ static int	is_valid_chunk(char **array)
 			while (array[i][j])
 			{
 				if (array[i][j] == '#')
-				neightbors += check_neightbors(array, i, j);
+					neighbors += check_neighbors(array, i, j);
 				j++;
 			}
 			j = 0;
 			i++;
 		}
 	}
-	return (neightbors >= 6);
+	return (neighbors >= 6);
 }
 
 static int	parse_input_chunk(char const *chunk, t_lst **data)
 {
 	static int	count = -1;
-	char 		**array;
+	char		**array;
 
 	if (count < 26 && chunk && ft_strlen(chunk) == 20)
 	{
@@ -73,22 +73,22 @@ static int	parse_input_chunk(char const *chunk, t_lst **data)
 			chunk[14] != '\n' || chunk[19] != '\n')
 			return (0);
 		array = ft_strsplit(chunk, '\n');
-		// think about freeing array
 		if (is_valid_chunk(array))
 		{
-			push_to_list(data, new_node(recognize_tetriminos(array), count + 'A'));
+			push_to_list(data, new_node(recognize_tetriminos(array)));
 			return (1);
 		}
 		else
 			return (0);
+		ft_arrdel(&array);
 	}
 	return (1);
 }
 
-int parse_input_file(char const *file, t_lst **data)
+int			parse_input_file(char const *file, t_lst **data)
 {
 	int		fd;
-	int		ret;
+	int		r;
 	char	buf[21];
 	char	skip[1];
 
@@ -97,18 +97,17 @@ int parse_input_file(char const *file, t_lst **data)
 		while (1)
 		{
 			ft_memset((void *)buf, 0x00, 21);
-			ret = read(fd, buf, 20);
-			ft_putstr_fd(buf, 2);
-			ft_putchar('\n');
-			if (ret != 20 || !parse_input_chunk(buf, data))
+			r = read(fd, buf, 20);
+			if (r != 20 || !parse_input_chunk(buf, data))
 				return (0);
-			ret = read(fd, skip, 1);
-			if (ret == 1 && *skip != '\n')
+			r = read(fd, skip, 1);
+			if (r == 1 && *skip != '\n')
 				return (0);
-			if (ret <= 0)
+			if (r <= 0)
 				break ;
 		}
 		close(fd);
+		return (1);
 	}
-	return (1);
+	return (0);
 }

@@ -10,9 +10,9 @@ SRCS		=	\
 				main.c			\
 				input.c			\
 				tetriminos.c	\
-				square.c		\
 				list.c			\
 				misc.c			\
+				fillit.c		\
 				fill.c			\
 
 # ---------------------------------------------------------------------------- #
@@ -20,7 +20,6 @@ SRCS		=	\
 # ---------------------------------------------------------------------------- #
 
 CFLAGS		=	\
-				-g 								\
 				-Wall -Wextra -Werror			\
 
 # >>> REQUIRED FOR LIBRARIES >>> THINK ABOUT CHANGING THE *LIBS rules
@@ -72,7 +71,6 @@ OBJ			=	$(addprefix $(DIROBJ), $(notdir $(SRC:.c=.o)))
 # ---------------------------------------------------------------------------- #
 
 all			:	libs $(NAME)
-	@printf "$(C_GRE)[ $(NAME) ] [ %-6s ]$(C_DFL) build completed\n" "$(MAKE)"
 
 $(NAME)		:	$(DIROBJ) $(OBJ)
 	@printf "$(C_GRE)[ $(NAME) ] [ %-6s ]$(C_DFL) linking objects\n" "$(CC)"
@@ -134,25 +132,25 @@ depend		:
 #start
 
 $(DIROBJ)main.o: srcs/main.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/main.c -o ./.objs/main.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/main.c -o ./.objs/main.o $(CPPFLAGS) $(CFLAGS)
 
 $(DIROBJ)input.o: srcs/input.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/input.c -o ./.objs/input.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/input.c -o ./.objs/input.o $(CPPFLAGS) $(CFLAGS)
 
 $(DIROBJ)tetriminos.o: srcs/tetriminos.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/tetriminos.c -o ./.objs/tetriminos.o $(CPPFLAGS) $(CFLAGS) 
-
-$(DIROBJ)square.o: srcs/square.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/square.c -o ./.objs/square.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/tetriminos.c -o ./.objs/tetriminos.o $(CPPFLAGS) $(CFLAGS)
 
 $(DIROBJ)list.o: srcs/list.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/list.c -o ./.objs/list.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/list.c -o ./.objs/list.o $(CPPFLAGS) $(CFLAGS)
 
 $(DIROBJ)misc.o: srcs/misc.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/misc.c -o ./.objs/misc.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/misc.c -o ./.objs/misc.o $(CPPFLAGS) $(CFLAGS)
+
+$(DIROBJ)fillit.o: srcs/fillit.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
+		@$(CC) -c ./srcs/fillit.c -o ./.objs/fillit.o $(CPPFLAGS) $(CFLAGS)
 
 $(DIROBJ)fill.o: srcs/fill.c incs/fillit.h libs/libft/./incs/libft.h     libs/libft/./incs/gnl.h
-		@$(CC) -c ./srcs/fill.c -o ./.objs/fill.o $(CPPFLAGS) $(CFLAGS) 
+		@$(CC) -c ./srcs/fill.c -o ./.objs/fill.o $(CPPFLAGS) $(CFLAGS)
 
 
 #end
