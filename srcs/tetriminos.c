@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:24:29 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/14 21:05:50 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 23:00:52 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char			*stringify_tetriminos(char **arr)
 		str = ft_strcat(str, *arr);
 		arr++;
 	}
-	return (ft_strdup(str));
+	return (str);
 }
 
 t_tet				recognize_tetriminos(char **array)

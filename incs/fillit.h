@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:07:14 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/14 20:58:03 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 22:55:13 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdio.h>
 
 typedef struct		s_pos
 {

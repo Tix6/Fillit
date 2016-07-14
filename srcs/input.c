@@ -6,7 +6,7 @@
 /*   By: mleconte <mleconte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 19:12:21 by mleconte          #+#    #+#             */
-/*   Updated: 2016/07/14 21:16:30 by mleconte         ###   ########.fr       */
+/*   Updated: 2016/07/14 23:13:28 by mleconte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ static int	is_valid_chunk(char **array)
 
 static int	parse_input_chunk(char const *chunk, t_lst **data)
 {
-	static int	count = -1;
+	static int	count = 0;
 	char		**array;
 
-	if (count < 26 && chunk && ft_strlen(chunk) == 20)
+	if (chunk && ft_strlen(chunk) == 20)
 	{
-		count++;
+		if (++count > 26)
+			return (0);
 		if (count_char(chunk, '#') != 4 ||
 			count_char(chunk, '.') != 12 ||
 			count_char(chunk, '\n') != 4)
@@ -76,13 +77,13 @@ static int	parse_input_chunk(char const *chunk, t_lst **data)
 		if (is_valid_chunk(array))
 		{
 			push_to_list(data, new_node(recognize_tetriminos(array)));
+			ft_arrdel(&array);
 			return (1);
 		}
 		else
 			return (0);
-		ft_arrdel(&array);
 	}
-	return (1);
+	return (0);
 }
 
 int			parse_input_file(char const *file, t_lst **data)
